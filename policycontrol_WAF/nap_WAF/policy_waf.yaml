@@ -1,0 +1,12 @@
+apiVersion: k8s.nginx.org/v1
+kind: Policy
+metadata:
+  name: waf-default
+spec:
+  waf:
+    enable: true
+    apPolicy: "cafe/appprotect"
+    securityLogs:
+    - enable: true
+      apLogConf: "cafe/logconf"
+

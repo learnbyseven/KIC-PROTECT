@@ -1,0 +1,44 @@
+#apiVersion: k8s.nginx.org/v1
+#kind: VirtualServer
+#metadata:
+#  name: rate-limiting-example
+#spec:
+#  host: ec2-35-154-229-189.ap-south-1.compute.amazonaws.com
+#  tls:
+#    secret: cafe-secret
+#  upstreams:
+#  - name: cafeshop
+#    service: cafeshop
+#    port: 80
+#    lb-method: round_robin
+#    max-conns: 1
+#  routes:
+#  - path: /
+#    action:
+#      pass: cafeshop
+---
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: cafe-rate-limiting
+  namespace: cafe
+spec:
+  http-snippets: |
+    limit_req_zone $binary_remote_addr zone=mylimit:10m rate=1r/s;
+    proxy_cache_path /tmp keys_zone=one:10m;
+  host: ec2-35-154-229-189.ap-south-1.compute.amazonaws.com
+  tls:
+    secret: cafe-secret
+  server-snippets: |
+        limit_req zone=mylimit;
+  upstreams:
+  - name: cafeshop
+    service: cafeshop
+    port: 80
+  routes:
+  - path: /
+    location-snippets: |
+      proxy_cache one;
+      proxy_cache_valid 200 10m;
+    action:
+      pass: cafeshop

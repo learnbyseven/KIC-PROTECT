@@ -1,0 +1,17 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: rewrite-example
+spec:
+  host: coffee.giri.local
+  upstreams:
+  - name: coffee
+    service: coffee
+    port: 8082
+  routes:
+  - path: /api/v1/coffee
+    action: 
+     proxy:
+       rewritePath: /api/v2/coffee
+       upstream: coffee
+

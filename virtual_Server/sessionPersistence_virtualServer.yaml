@@ -1,0 +1,19 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: session-persistence-example
+spec:
+  host: cafeshop.example.com
+  tls:
+    secret: cafe-secret
+  upstreams:
+  - name: cafeshop
+    service: cafeshop
+    port: 80
+    sessionCookie:
+      enable: true
+      name: srv_id
+  routes:
+  - path: /
+    action:
+      pass: cafeshop

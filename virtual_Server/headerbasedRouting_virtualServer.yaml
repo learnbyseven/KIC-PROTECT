@@ -1,0 +1,31 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: header-example
+spec:
+  host: cafeshop.giri.local
+  upstreams:
+  - name: cafeshop
+    service: cafeshop
+    port: 80
+  - name: tea
+    service: tea
+    port: 8081
+  - name: coffee
+    service: coffee
+    port: 8082
+  routes:
+  - path: /
+    matches:
+    - conditions:
+      - cookie: order
+        value: tea
+      action:
+        pass: tea
+    - conditions:
+      - cookie: order
+        value: coffee
+      action:
+        pass: coffee
+    action:
+      pass: cafeshop

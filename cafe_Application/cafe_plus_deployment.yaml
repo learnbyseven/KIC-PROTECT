@@ -1,0 +1,132 @@
+# Deployment cafeplus imageID: giriraj789/
+# 80 --> {"Service":"CAFE-SHOP"}
+# 8081 --> {"Service":"TEA"}
+# 8081/api/v1/tea --> {"service":"TEA-v1"}
+# 8081/api/v2/tea --> {"service":"TEA-v2"}
+# 8082 --> {"Service":"COFFEE"}
+# 8082/api/v1/coffee --> {"service":"COFFEE-v1"}
+# 8082/api/v2/coffee --> {"service":"COFFEE-v2"}
+# 9091 --> {"Server":"Alpha"}
+# 9092 --> {"Server":"Beta"}
+# 9093 --> {"Server":"Gamma"}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cafeplus
+  labels:
+    app: cafeplus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cafeplus
+  template:
+    metadata:
+      labels:
+        app: cafeplus
+    spec:
+      containers:
+      - name: cafeplus
+        image: giriraj789/cafeplus:v1
+        resources:
+            limits:
+              memory: 200Mi
+              cpu: 300m
+            requests:
+              memory: 100Mi
+              cpu: 200m
+        readinessProbe:
+          httpGet:
+            port: 80
+            path: /healthz
+          initialDelaySeconds: 1
+          periodSeconds: 5
+          timeoutSeconds: 4
+          successThreshold: 2
+          failureThreshold: 3
+        ports:
+        - containerPort: 80
+        - containerPort: 8081
+        - containerPort: 8082
+        - containerPort: 9091
+        - containerPort: 9092
+        - containerPort: 9093
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cafeshop
+spec:
+  selector:
+    app: cafeplus
+  ports:
+    - name: http-cafeshop
+      port: 80
+      targetPort: 80
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tea
+spec:
+  selector:
+    app: cafeplus
+  ports:
+    - name: http-tea
+      port: 8081
+      targetPort: 8081
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coffee
+spec:
+  selector:
+    app: cafeplus
+  ports:
+    - name: http-coffee
+      port: 8082
+      targetPort: 8082
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alpha
+spec:
+  selector:
+    app: cafeplus
+  ports:
+    - name: http-alpha
+      port: 9091
+      targetPort: 9091
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: beta
+spec:
+  selector:
+    app: cafeplus
+  ports:
+    - name: http-beta
+      port: 9092
+      targetPort: 9092
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gamma
+spec:
+  selector:
+    app: cafeplus
+  ports:
+    - name: http-gamma
+      port: 9093
+      targetPort: 9093
+      protocol: TCP

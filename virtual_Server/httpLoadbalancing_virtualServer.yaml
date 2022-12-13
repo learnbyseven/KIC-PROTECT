@@ -1,0 +1,18 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: http-load-balancing
+spec:
+  host: cafeshop.example.com
+  #tls:
+    #secret: cafe-secret
+  upstreams:
+  - name: cafeshop
+    service: cafeshop
+    port: 80
+    lb-method: round_robin # Load balancing Algo to use 
+    max-conns: 5 #Controlling 5 max concurrent connection per second
+  routes:
+  - path: /
+    action:
+      pass: cafeshop

@@ -1,0 +1,20 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: redirect-example
+spec:
+  host: cafeshop.giri.local
+  upstreams:
+  - name: cafeshop
+    service: cafeshop
+    port: 80
+  routes:
+  - path: /righturl
+    action: 
+      pass: cafeshop
+  - path: /badurl
+    action: 
+      redirect:
+        url: http://172.31.12.84/righturl
+        code: 301
+

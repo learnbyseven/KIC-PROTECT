@@ -1,0 +1,23 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: active-healthcheck-example
+spec:
+  host: cafe.giri.local
+  upstreams:
+  - name: cafeshop
+    service: cafeshop
+    port: 80
+    healthCheck:
+       enable: true
+       path: /healthz
+       interval: 20s
+       jitter: 3s
+       fails: 5
+       passes: 5
+       port: 80
+  routes:
+  - path: /
+    action:
+      pass: cafeshop
+

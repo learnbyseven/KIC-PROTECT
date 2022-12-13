@@ -1,0 +1,20 @@
+## Usecase Rate-limiting Using policy control
+---
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: policy-rate-limiting
+spec:
+  host: ec2-35-154-229-189.ap-south-1.compute.amazonaws.com
+  tls:
+    secret: cafe-secret
+  upstreams:
+  - name: cafeshop
+    service: cafeshop
+    port: 80
+  routes:
+  - path: /
+    policies: # route policies
+    - name: rate-limit
+    action:
+      pass: cafeshop
