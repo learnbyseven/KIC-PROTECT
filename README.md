@@ -29,9 +29,10 @@
 #### Case 3
 ```
 kubectl -n <namespace> create -f sessionPersistence_virtualServer.yaml \
-b. Open -> Browser -> place <host_fqdn> as url -> developer tool -> Browse >host_fqdn>. \
-c. Inside Developer tool look for Response header -> srv_id (Persist session to backend server). 
 ```
+* Open -> Browser -> place <host_fqdn> as url -> developer tool -> Browse >host_fqdn>. \
+* Inside Developer tool look for Response header -> srv_id (Persist session to backend server). 
+
 #### Case 4 
 ```
 a. Pod spec should have Readiness probe for a healthcheck URL/Path , check Cafe deployment spec for reference. \
