@@ -15,10 +15,10 @@
 * Use header flag with curl, in case of absence of DNS entry for <Host_Fqdn> , curl -H "Host: <host_fqdn>" http/https://<NIC-IP>
 
 #### Case 1 
-a. $kubectl create namespace <namespace>
-b. $kubectl create -f cafe_Application/
-c. $cd virtual_Server 
-c. $kubectl -n <namespace> create -f httpLoadbalancing_virtualServer.yaml
+* $kubectl create namespace <namespace>
+* $kubectl create -f cafe_Application/
+* $cd virtual_Server 
+- $kubectl -n <namespace> create -f httpLoadbalancing_virtualServer.yaml
 
 #### Case 2 (With TCP sample APP)
 
