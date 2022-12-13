@@ -18,7 +18,7 @@
  a\ $kubectl create namespace <namespace>
  b\ $kubectl create -f cafe_Application/
  c\ $cd virtual_Server 
- d\ $kubectl -n <namespace> create -f httpLoadbalancing_virtualServer.yaml
+ d $kubectl -n <namespace> create -f httpLoadbalancing_virtualServer.yaml
 
 #### Case 2 (With TCP sample APP)
 
