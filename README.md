@@ -14,14 +14,15 @@
 
 * Use header flag with curl, in case of absence of DNS entry for <Host_Fqdn> , curl -H "Host: <host_fqdn>" http/https://<NIC-IP>
 
- ```
+
 #### Case 1 
+ ```
  a.$kubectl create namespace <namespace>  \
- 
  b. $kubectl create -f cafe_Application/  \
  c. $cd virtual_Server \
  d. $kubectl -n <namespace> create -f httpLoadbalancing_virtualServer.yaml 
-
+```
+ 
 #### Case 2 (With TCP sample APP)
 
 
@@ -57,6 +58,7 @@ b. $for i in {1..21}; do curl <host_fqdn>; done \
 c. Verify "(HTTP) 503 Service Unavailable" page.
 
 #### Case 9
+```
 a. $cd ../ \
 b. $kubectl -n <namespace> create -f policycontrol_WAF/nap_WAF/\
 c. Curl/Browser http://<host_fqdn>/?a=<script> (Eg. for SQL injection , TOP 10 OWASP).
