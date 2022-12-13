@@ -56,5 +56,5 @@ c. Verify "(HTTP) 503 Service Unavailable" page.
 
 #### Case 9
 a. $cd ../ \
-a. $kubectl -n <namespace> create -f policycontrol_WAF/nap_WAF/\
-b. Curl/Browser http://<host_fqdn>/?a=<script> (Eg. for SQL injection , TOP 10 OWASP).
+b. $kubectl -n <namespace> create -f policycontrol_WAF/nap_WAF/\
+c. Curl/Browser http://<host_fqdn>/?a=<script> (Eg. for SQL injection , TOP 10 OWASP).
