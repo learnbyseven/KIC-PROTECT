@@ -16,17 +16,17 @@
 
 #### Case 1 
  a. $kubectl create namespace <namespace> \
- b\ $kubectl create -f cafe_Application/
- c\ $cd virtual_Server 
- d $kubectl -n <namespace> create -f httpLoadbalancing_virtualServer.yaml
+ b. $kubectl create -f cafe_Application/  \
+ c. $cd virtual_Server \
+ d. $kubectl -n <namespace> create -f httpLoadbalancing_virtualServer.yaml \
 
 #### Case 2 (With TCP sample APP)
 
 
 #### Case 3
-a. $kubectl -n <namespace> create -f sessionPersistence_virtualServer.yaml
-b. Open -> Browser -> place <host_fqdn> as url -> developer tool -> Browse >host_fqdn>. 
-c. Inside Developer tool look for Response header -> srv_id (Persist session to backend server).
+a. $kubectl -n <namespace> create -f sessionPersistence_virtualServer.yaml \
+b. Open -> Browser -> place <host_fqdn> as url -> developer tool -> Browse >host_fqdn>. \
+c. Inside Developer tool look for Response header -> srv_id (Persist session to backend server). \
 
 #### Case 4 
 Pod spec should have Readiness probe for a healthcheck URL/Path , check Cafe deployment spec for reference.
