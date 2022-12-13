@@ -68,8 +68,8 @@ for i in {1..21}; do curl <host_fqdn>; done
  
 #### Case 9
 ```
-cd ../ \
-kubectl -n <namespace> create -f policycontrol_WAF/nap_WAF/\
+cd ../ 
+kubectl -n <namespace> create -f policycontrol_WAF/nap_WAF/
 curl http://<host_fqdn>/?a=<script> 
 ```
 * (Eg. above for SQL injection , TOP 10 OWASP)
