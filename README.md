@@ -1,7 +1,6 @@
 # nic_Usecases
-Nginx Ingress controller use_Cases
-Usecases Phase1
----------------
+## Nginx Ingress controller use_Cases
+### Usecases Phase1
 
 1. HTTP Load Balancing 
 2. TCP Load Balancing 
@@ -13,8 +12,7 @@ Usecases Phase1
 8. Rate-Limiting
 9. WAF - Default Policy 
 
-PS: Use header flag with curl, in case of absence of DNS entry for <Host_Fqdn> eg.below
-curl -H "Host: <host_fqdn>" http/https://<NIC-IP>
+- Use header flag with curl, in case of absence of DNS entry for <Host_Fqdn> , curl -H "Host: <host_fqdn>" http/https://<NIC-IP>
 
 Case-1 
 a. $kubectl create namespace <namespace>
@@ -61,5 +59,4 @@ a. $cd ../
 a. $kubectl -n <namespace> create -f policycontrol_WAF/nap_WAF/
 b. Curl/Browser http://<host_fqdn>/?a=<script> (Eg. for SQL injection , TOP 10 OWASP).
 
-
-<-----END----->
+//FINISH
