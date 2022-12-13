@@ -17,9 +17,9 @@
 
 #### Case 1 
  ```
- kubectl create namespace <namespace>  \
- kubectl create -f cafe_Application/  \
- cd virtual_Server \
+ kubectl create namespace <namespace>  
+ kubectl create -f cafe_Application/  
+ cd virtual_Server 
  kubectl -n <namespace> create -f httpLoadbalancing_virtualServer.yaml 
 ```
  
