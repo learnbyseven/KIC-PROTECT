@@ -1,0 +1,17 @@
+NIC logs 
+- Process (Process updated from kube api, generate nginx confs , reload) 
+- Access (how client req processed, log-format for HTTP and HTTPS traffic and stream-log-format for TCP, UDP, and TLS Passthrough traffic) 
+- Error (NGINX writes information about encountered issues of different severity levels, eg.debug) 
+* verbosity default 1 (min) Max 3 Trouble shoot
+* All logs sent to the standard output and error of the Ingress Controller process
+
+NAP logs 
+- Security/Request/traffic log: The HTTP requests/response and how App Protect processed them based on policies, including violations and signatures found.
+  File Destination , Yes/absolute path to local file, Stderr , Syslog-yes, Format Default Json
+- Operation logs: Events such as startup, shutdown and reconfiguration.
+  File Destination , Yes/ NGINX error log, Stderr , Syslog-NO
+- Debug logs: technical messages at different levels of severity used to debug and resolve incidents and error behaviors
+  File destination : Yes , /var/log/app_protect
+* Additional data from Nginx Access logs
+* No audit logs - depends on other tools (linux, orchestration) 
+
