@@ -12,7 +12,7 @@ Usecases Phase1
 9. WAF - Default Policy 
 
 PS: Use header flag with curl, in case of absence of DNS entry for <Host_Fqdn> eg.below
-curl -H "Host: <host_fqdn>" http/https://<NIC-IP>
+curl -H "Host: <host_fqdn>" http/https://<NIC-IP>:<NIC-SVC-PORT>
 
 Case-1 
 a. $kubectl create namespace <namespace>
