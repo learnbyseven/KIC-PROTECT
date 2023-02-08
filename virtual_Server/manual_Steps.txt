@@ -13,6 +13,7 @@ Usecases Phase1
 
 PS: Use header flag with curl, in case of absence of DNS entry for <Host_Fqdn> eg.below
 curl -H "Host: <host_fqdn>" http/https://<NIC-IP>:<NIC-SVC-PORT>
+eg. curl -H "Host: cafeshop.example.com" http://172.31.12.84
 
 Case-1 
 a. $kubectl create namespace <namespace>
