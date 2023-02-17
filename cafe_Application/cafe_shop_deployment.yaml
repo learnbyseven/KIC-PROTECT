@@ -1,34 +1,42 @@
-# Deployment cafeplus imageID: giriraj789/
+# Date: Feb-2023 Deployment cafeshop imageID: docker pull giriraj789/cafeshop:v1 
 # 80 --> {"Service":"CAFE-SHOP"}
+# 80/healthz
+# 80/righturl
+# 80/badurl
 # 8081 --> {"Service":"TEA"}
 # 8081/api/v1/tea --> {"service":"TEA-v1"}
 # 8081/api/v2/tea --> {"service":"TEA-v2"}
 # 8082 --> {"Service":"COFFEE"}
 # 8082/api/v1/coffee --> {"service":"COFFEE-v1"}
 # 8082/api/v2/coffee --> {"service":"COFFEE-v2"}
-# 9091 --> {"Server":"Alpha"}
-# 9092 --> {"Server":"Beta"}
-# 9093 --> {"Server":"Gamma"}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cafeshop
+  labels:
+    istio-injection: disabled
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cafeplus
+  name: cafeshop
+  namespace: cafeshop
   labels:
-    app: cafeplus
+    app: cafeshop
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cafeplus
+      app: cafeshop
   template:
     metadata:
       labels:
-        app: cafeplus
+        app: cafeshop
     spec:
       containers:
-      - name: cafeplus
-        image: giriraj789/cafeplus:v1
+      - name: cafeshop
+        image: giriraj789/cafeshop:v1
         resources:
             limits:
               memory: 200Mi
@@ -49,17 +57,15 @@ spec:
         - containerPort: 80
         - containerPort: 8081
         - containerPort: 8082
-        - containerPort: 9091
-        - containerPort: 9092
-        - containerPort: 9093
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: cafeshop
+  namespace: cafeshop
 spec:
   selector:
-    app: cafeplus
+    app: cafeshop
   ports:
     - name: http-cafeshop
       port: 80
@@ -70,9 +76,10 @@ apiVersion: v1
 kind: Service
 metadata:
   name: tea
+  namespace: cafeshop
 spec:
   selector:
-    app: cafeplus
+    app: cafeshop
   ports:
     - name: http-tea
       port: 8081
@@ -83,50 +90,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: coffee
+  namespace: cafeshop
 spec:
   selector:
-    app: cafeplus
+    app: cafeshop
   ports:
     - name: http-coffee
       port: 8082
       targetPort: 8082
-      protocol: TCP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: alpha
-spec:
-  selector:
-    app: cafeplus
-  ports:
-    - name: http-alpha
-      port: 9091
-      targetPort: 9091
-      protocol: TCP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: beta
-spec:
-  selector:
-    app: cafeplus
-  ports:
-    - name: http-beta
-      port: 9092
-      targetPort: 9092
-      protocol: TCP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: gamma
-spec:
-  selector:
-    app: cafeplus
-  ports:
-    - name: http-gamma
-      port: 9093
-      targetPort: 9093
       protocol: TCP
