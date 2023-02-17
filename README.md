@@ -1,6 +1,4 @@
-# Usecases
-## Nginx Ingress controller use_Cases
-### Usecases Phase1
+# Usecases Phase1
 
 1. HTTP Load Balancing 
 2. TCP Load Balancing 
