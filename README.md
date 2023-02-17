@@ -1,4 +1,4 @@
-# nic_Usecases
+# Usecases
 ## Nginx Ingress controller use_Cases
 ### Usecases Phase1
 
