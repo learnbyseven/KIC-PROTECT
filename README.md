@@ -74,7 +74,7 @@ curl http://<host_fqdn>/?a=<script>
 
 
 # Usecases Phase2
-1. VS/VSR implementation design  
+1. VS/VSR design 
 2. NIC - Logs/Metrics forwarding format JSON 
 3. NAP - Logs forwarding format JSON
 #### Case 1 
