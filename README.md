@@ -71,3 +71,7 @@ kubectl -n <namespace> create -f policycontrol_WAF/nap_WAF/
 curl http://<host_fqdn>/?a=<script> 
 ```
 * (Eg. above for SQL injection , TOP 10 OWASP)
+
+
+# Usecases Phase2
+
