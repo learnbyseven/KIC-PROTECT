@@ -78,7 +78,18 @@ curl http://<host_fqdn>/?a=<script>
 2. NIC - Logs/Metrics forwarding format JSON 
 3. NAP - Logs forwarding format JSON
 #### Case 1 
+- nginx-config-map.yaml
 ```
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: my-release-nginx-ingress
+  namespace: nginx-ingress
+data:
+  log-format-escaping: json
+  log-format: '{"time":"$msec","proxyHost":"$proxy_host", "host": "$http_host"}'
+  stream-log-format-escaping: json
+  stream-log-format: '{"remote_addr":"$remote_addr [$time_local]", "protocol":"$protocol", "ssl_server": "$ssl_preread_server_name"}'
 
 ```
 #### Case 2
