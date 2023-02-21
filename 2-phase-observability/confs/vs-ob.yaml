@@ -1,0 +1,34 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: vs-ob
+  namespace: cafeshop
+spec:
+  host: cafeshop.giri.local
+  upstreams:
+  - name: cafeshop
+    service: cafeshop
+    port: 80
+  - name: tea
+    service: tea
+    port: 8081
+  - name: coffee
+    service: coffee
+    port: 8082
+  routes:
+  - path: /
+    policies: #NAP default policy
+    - name: nap-ob
+    matches:
+    - conditions:
+      - cookie: order
+        value: tea
+      action:
+        pass: tea
+    - conditions:
+      - cookie: order
+        value: coffee
+      action:
+        pass: coffee
+    action:
+      pass: cafeshop

@@ -1,0 +1,12 @@
+apiVersion: k8s.nginx.org/v1
+kind: Policy
+metadata:
+  name: nap-ob
+  namespace: cafeshop
+spec:
+  waf:
+    enable: true
+    apPolicy: "cafeshop/protect-ob"
+    securityLogs:
+    - enable: true
+      apLogConf: "cafeshop/log-ob"

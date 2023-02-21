@@ -1,0 +1,63 @@
+controller:
+  kind: daemonset
+  nginxplus: true
+  nginxReloadTimeout: 60000
+  appprotect:
+    enable: true
+  appprotectdos:
+    enable: false
+  hostNetwork: false
+  logLevel: 1
+  image:
+    repository: giriraj789/ic-nap
+    tag: "2.4.0"
+    pullPolicy: IfNotPresent
+  lifecycle: {}
+  customConfigMap: ""
+  config:
+    annotations: {}
+    entries: {}
+  terminationGracePeriodSeconds: 30
+  #nodeSelector:
+  # mynode: kic
+  resources:
+    requests:
+      cpu: 1
+      memory: 1Gi
+    limits:
+      cpu: 1
+      memory: 2Gi
+  topologySpreadConstraints: {} 
+  replicaCount: 2
+  ingressClass: nginx
+  watchNamespace: ""
+  enableCustomResources: true
+  enablePreviewPolicies: false
+  enableOIDC: false
+  includeYear: false
+  enableTLSPassthrough: false
+  enableCertManager: false
+  enableExternalDNS: false
+  globalConfiguration:
+    create: true
+  enableSnippets: true
+  healthStatus: true
+  healthStatusURI: "/nginx-health"
+  nginxStatus:
+    enable: true
+    port: 8080
+    allowCidrs: "0.0.0.0/0,0:0:0:0:0:0:0:0/0"
+  service:
+    create: false
+    httpPort:
+      enable: false
+    httpsPort:
+      enable: false
+  pod:
+    extraLabels: {app.kubernetes.io/name: nginx-ingress, app.kubernetes.io/instance: nginx-ingress}
+  disableIPV6: false
+  rbac:
+    create: true
+  prometheus:
+    create: true
+    port: 9113
