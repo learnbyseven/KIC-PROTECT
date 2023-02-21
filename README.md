@@ -68,7 +68,7 @@ for i in {1..21}; do curl <host_fqdn>; done
 ```
 cd ../ 
 kubectl -n <namespace> create -f policycontrol_WAF/nap_WAF/
-curl http://<host_fqdn>/?a=<script> 
+curl -X POST -i --data '<script>alert(/XSS/)</script>' http://cafeshop.giri.local
 ```
 * (Eg. above for SQL injection , TOP 10 OWASP)
 
