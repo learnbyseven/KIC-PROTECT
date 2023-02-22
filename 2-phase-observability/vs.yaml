@@ -1,7 +1,7 @@
 apiVersion: k8s.nginx.org/v1
 kind: VirtualServer
 metadata:
-  name: vs-ob
+  name: vs
   namespace: cafeshop
 spec:
   host: cafeshop.giri.local
@@ -17,8 +17,6 @@ spec:
     port: 8082
   routes:
   - path: /
-    policies: #NAP default policy
-    - name: pol-ob
     matches:
     - conditions:
       - cookie: order
