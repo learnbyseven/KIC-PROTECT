@@ -54,7 +54,7 @@ controller:
     httpsPort:
       enable: false
   pod:
-          extraLabels: {app.kubernetes.io/name: nginx-ingress, app.kubernetes.io/instance: nginx-ingress, ns_uuid: e02275dc-b198-41b0-b5b5-951b82cf5ec7, cnf_uuid: a0bd2869-028f-4d32-8229-9ecea391d3a5, cnfc_uuid: 02c4aefa-8fc6-4452-9b0b-3fff568928ee, cnfc_uuid: 556b4b9e-7286-4e68-a68d-6201b27d1573, my_uuid: hellogiri, cnfc_uuid: fake-id-test123}
+          extraLabels: {app.kubernetes.io/name: nginx-ingress, app.kubernetes.io/instance: nginx-ingress, nas_uuid: 123567-abc-99012, caf_uuid: 123-5b-990-123, csff_uuid: 8f00123c6-4452 }
   disableIPV6: false
   rbac:
     create: true
