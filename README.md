@@ -74,11 +74,16 @@ curl -X POST -i --data '<script>alert(/XSS/)</script>' http://cafeshop.giri.loca
 
 
 # Usecases Phase2
-1. VS/VSR design 
-2. NIC - Logs/Metrics forwarding format JSON 
-3. NAP - Logs forwarding format JSON
+1. NIC - Custom Logs with UUID data, format-JSON as STD-OUTPUT/ERR (Pods Logs) , Collected by FluentBIT 
+   Verifcation : OB team to validate the log format and custom UUID data collection. 
+2. NIC metrics export in Promethues format 
+   Verification: OB team to validate the metrics exported from the endpoint in promethues format and collected by the metrics collector. 
+3. NAP - Security Logs forwarding format JSON as STD-OUTPUT/ERR (Pods Logs) , Collected by FluentBIT 
+   Verifcation : OB team to validate the log format and collection.
+ 
 #### Case 1 
-- nginx-config-map.yaml
+
+- nginx-config-map.yaml (Config name, Namespace must be similar to the applied config map eg. name: my-release-nginx-ingress , namespace: nginx-ingress)
 ```
 kind: ConfigMap
 apiVersion: v1
@@ -92,11 +97,16 @@ data:
   stream-log-format: '{"remote_addr":"$remote_addr [$time_local]", "protocol":"$protocol", "ssl_server": "$ssl_preread_server_name"}'
 
 ```
+```
+kubectl apply -f nginx-config-map.yaml
+```
 #### Case 2
 ```
-
+Testing in progress 
 ```
 #### Case 3 
 ```
-
+Testing in progress
 ```
+
+
