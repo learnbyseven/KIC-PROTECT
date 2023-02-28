@@ -1,0 +1,101 @@
+# Date: Feb-2023 Deployment cafeshop imageID: docker pull giriraj789/cafeshop:v1 
+# 80 --> {"Service":"CAFE-SHOP"}
+# 80/healthz
+# 80/righturl
+# 80/badurl
+# 8081 --> {"Service":"TEA"}
+# 8081/api/v1/tea --> {"service":"TEA-v1"}
+# 8081/api/v2/tea --> {"service":"TEA-v2"}
+# 8082 --> {"Service":"COFFEE"}
+# 8082/api/v1/coffee --> {"service":"COFFEE-v1"}
+# 8082/api/v2/coffee --> {"service":"COFFEE-v2"}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app-dev
+  labels:
+    istio-injection: disabled
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cafeshop
+  namespace: app-dev
+  labels:
+    app: cafeshop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cafeshop
+  template:
+    metadata:
+      labels:
+        app: cafeshop
+    spec:
+      containers:
+      - name: cafeshop
+        image: giriraj789/cafeshop:v1
+        resources:
+            limits:
+              memory: 200Mi
+              cpu: 300m
+            requests:
+              memory: 100Mi
+              cpu: 200m
+        readinessProbe:
+          httpGet:
+            port: 80
+            path: /healthz
+          initialDelaySeconds: 1
+          periodSeconds: 5
+          timeoutSeconds: 4
+          successThreshold: 2
+          failureThreshold: 3
+        ports:
+        - containerPort: 80
+        - containerPort: 8081
+        - containerPort: 8082
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cafeshop
+  namespace: app-dev
+spec:
+  selector:
+    app: cafeshop
+  ports:
+    - name: http-cafeshop
+      port: 80
+      targetPort: 80
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tea
+  namespace: app-dev
+spec:
+  selector:
+    app: cafeshop
+  ports:
+    - name: http-tea
+      port: 8081
+      targetPort: 8081
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coffee
+  namespace: app-dev
+spec:
+  selector:
+    app: cafeshop
+  ports:
+    - name: http-coffee
+      port: 8082
+      targetPort: 8082
+      protocol: TCP

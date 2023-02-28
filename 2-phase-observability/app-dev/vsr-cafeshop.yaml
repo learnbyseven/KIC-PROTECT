@@ -1,0 +1,16 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServerRoute
+metadata:
+  name: vsr-coffee
+  namespace: app-dev-coffee
+spec:
+  host: cafeshop.giri.local
+  upstreams:
+  - name: coffee
+    service: coffee
+    port: 8082
+  subroutes:
+  - path: /
+    action:
+     pass: coffee
+  
