@@ -107,8 +107,8 @@ Annotations:
  prometheus.io/scrape: true
 Promethues endpoint : /metrics 
 Metrics Example 
-# HELP nginx_ingress_nginxplus_upstream_zombies Servers removed from the group but still processing active client requests
-# TYPE nginx_ingress_nginxplus_upstream_zombies gauge
+##### HELP nginx_ingress_nginxplus_upstream_zombies Servers removed from the group but still processing active client requests
+##### TYPE nginx_ingress_nginxplus_upstream_zombies gauge
 nginx_ingress_nginxplus_upstream_zombies{class="nginx",upstream="vs_dev-ops_vs-app-dev_vsr_app-dev-cafeshop_vsr-cafeshop_cafeshop"} 0
 nginx_ingress_nginxplus_upstream_zombies{class="nginx",upstream="vs_dev-ops_vs-app-dev_vsr_app-dev-coffee_vsr-coffee_coffee"} 0
 nginx_ingress_nginxplus_upstream_zombies{class="nginx",upstream="vs_dev-ops_vs-app-dev_vsr_app-dev-tea_vsr-tea_tea"} 0
