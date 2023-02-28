@@ -92,7 +92,7 @@ metadata:
   namespace: nginx-ingress
 data:
   log-format-escaping: json
-  log-format: '{"time":"$msec","proxyHost":"$proxy_host", "host": "$http_host"}'
+  log-format: '{"time":"$msec","proxyHost":"$proxy_host", "host": "$http_host", "UUID" : "abcd1235-789-xz"}'
   stream-log-format-escaping: json
   stream-log-format: '{"remote_addr":"$remote_addr [$time_local]", "protocol":"$protocol", "ssl_server": "$ssl_preread_server_name"}'
 
