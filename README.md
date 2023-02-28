@@ -101,12 +101,27 @@ data:
 kubectl apply -f nginx-config-map.yaml
 ```
 #### Case 2
+Annotations:     
+ prometheus.io/port: 9113
+ prometheus.io/scheme: http
+ prometheus.io/scrape: true
+Promethues endpoint : /metrics 
+Metrics Example 
+# HELP nginx_ingress_nginxplus_upstream_zombies Servers removed from the group but still processing active client requests
+# TYPE nginx_ingress_nginxplus_upstream_zombies gauge
+nginx_ingress_nginxplus_upstream_zombies{class="nginx",upstream="vs_dev-ops_vs-app-dev_vsr_app-dev-cafeshop_vsr-cafeshop_cafeshop"} 0
+nginx_ingress_nginxplus_upstream_zombies{class="nginx",upstream="vs_dev-ops_vs-app-dev_vsr_app-dev-coffee_vsr-coffee_coffee"} 0
+nginx_ingress_nginxplus_upstream_zombies{class="nginx",upstream="vs_dev-ops_vs-app-dev_vsr_app-dev-tea_vsr-tea_tea"} 0
+ 
 ```
-Testing in progress 
+curl http://<pod_ip>:9113/metrics
 ```
 #### Case 3 
 ```
 Testing in progress
 ```
 
-
+MISC Obervability
+-----------------
+#### POD health 
+-health-status-uri=/nginx-health
