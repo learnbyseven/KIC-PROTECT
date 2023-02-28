@@ -123,3 +123,4 @@ MISC Observability
 -----------------
 POD health 
 - health-status-uri=/nginx-health
+- ready-status-port=8081
