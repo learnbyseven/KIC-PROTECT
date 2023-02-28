@@ -119,7 +119,7 @@ curl http://<pod_ip>:9113/metrics
 Testing in progress
 ```
 
-MISC Obervability
+MISC Observability
 -----------------
-#### POD health 
--health-status-uri=/nginx-health
+POD health 
+- health-status-uri=/nginx-health
