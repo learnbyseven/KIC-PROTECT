@@ -124,3 +124,7 @@ MISC Observability
 POD health 
 - health-status-uri=/nginx-health
 - ready-status-port=8081
+
+#### RBAC-test
+<img width="1013" alt="image" src="https://user-images.githubusercontent.com/34051943/223300781-c298a8da-dcc1-497b-b9ce-eb6a9c7f9208.png">
+
