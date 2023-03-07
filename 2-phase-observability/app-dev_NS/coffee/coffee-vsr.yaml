@@ -1,7 +1,7 @@
 apiVersion: k8s.nginx.org/v1
 kind: VirtualServerRoute
 metadata:
-  name: vsr-coffee
+  name: coffee-vsr
   namespace: app-dev-coffee
 spec:
   host: cafeshop.giri.local

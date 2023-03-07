@@ -1,8 +1,8 @@
 apiVersion: appprotect.f5.com/v1beta1
 kind: APPolicy
 metadata:
-  name: apol-ob
-  namespace: app-dev
+  name: cafeshop-appolicy
+  namespace: nginx-ingress
 spec:
   policy:
     name: app_protect_default_policy

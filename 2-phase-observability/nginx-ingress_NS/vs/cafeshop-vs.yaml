@@ -1,0 +1,16 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: cafeshop-vs
+  namespace: nginx-ingress
+spec:
+  host: cafeshop.giri.local
+  policies:
+  - name: cafeshop-policy
+  routes:
+  - path: /
+    route: app-dev-cafeshop/cafeshop-vsr
+  - path: /api/v1/tea
+    route: app-dev-tea/tea-vsr
+  - path: /api/v1/coffee
+    route: app-dev-coffee/coffee-vsr

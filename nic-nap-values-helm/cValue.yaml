@@ -38,6 +38,8 @@ controller:
   enableTLSPassthrough: false
   enableCertManager: false
   enableExternalDNS: false
+  serviceAccount:
+    name: nginx-ingress
   globalConfiguration:
     create: true
   enableSnippets: true
