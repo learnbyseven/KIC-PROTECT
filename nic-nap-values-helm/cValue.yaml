@@ -63,3 +63,8 @@ controller:
   prometheus:
     create: true
     port: 9113
+    scheme: http
+  serviceInsight:
+    create: true
+    port: 9114
+    scheme: http
