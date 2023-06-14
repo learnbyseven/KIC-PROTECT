@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: secure-ingress
+spec:
+  tls:
+    - hosts:
+      - ec2-35-154-229-189.ap-south-1.compute.amazonaws.com
+      # This assumes tls-secret exists and the SSL
+      # certificate contains a CN for foo.bar.com
+      secretName: tls-cert
+  ingressClassName: nginx
+  rules:
+    - host: ec2-35-154-229-189.ap-south-1.compute.amazonaws.com
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            # This assumes http-svc exists and routes to healthy endpoints
+            service:
+              name: green
+              port:
+                number: 80

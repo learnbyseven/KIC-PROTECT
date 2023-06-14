@@ -4,7 +4,10 @@ metadata:
   name: my-rel-nginx-ingress
   namespace: nginx-ingress
 data:
+  error-log-level: crit
   log-format-escaping: json
   log-format: '{"time":"$msec","proxyHost":"$proxy_host", "host": "$http_host", "UUID" : "abcd1235-789-xz"}'
   stream-log-format-escaping: json
   stream-log-format: '{"remote_addr":"$remote_addr [$time_local]", "protocol":"$protocol", "ssl_server": "$ssl_preread_server_name"}'
+  app_protect_security_log "/etc/app_protect/conf/log_default.json" stderr;
+

@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+kind: Service
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: https-nic
+    namespace: nginx-ingress
+  spec:
+    ports:
+    - nodePort: 30443
+      port: 443
+      protocol: TCP
+      targetPort: 443
+    selector:
+       aff: nginx-ingress
+    type: NodePort
+  status:
+    loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: http-nic
+    namespace: nginx-ingress
+  spec:
+    ports:
+    - nodePort: 30080
+      port: 80
+      protocol: TCP
+      targetPort: 80
+    selector:
+       aff: nginx-ingress
+    type: NodePort
+  status:
+    loadBalancer: {}
+---
