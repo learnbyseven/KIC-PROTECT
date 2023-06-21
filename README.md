@@ -129,3 +129,16 @@ POD health
 <img width="799" alt="image" src="https://user-images.githubusercontent.com/34051943/223352679-66bf7f13-7b35-4ec8-ba77-0b17966b5dad.png">
 
 
+
+Admin tasks
+Cluster-roles/role bindings creation 
+
+
+root@ip-172-31-12-84:~/kubernetes-ingress/deployments/rbac# k create -f ap-rbac.yaml 
+clusterrole.rbac.authorization.k8s.io/nginx-ingress-app-protect created
+clusterrolebinding.rbac.authorization.k8s.io/nginx-ingress-app-protect created
+
+
+root@ip-172-31-12-84:~/kubernetes-ingress/deployments/rbac# k create -f rbac.yaml 
+clusterrole.rbac.authorization.k8s.io/nginx-ingress created
+clusterrolebinding.rbac.authorization.k8s.io/nginx-ingress created
