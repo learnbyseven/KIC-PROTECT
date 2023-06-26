@@ -1,15 +1,17 @@
+rbac:
+  create: false
 controller:
   kind: deployment
   strategy:
     rollingUpdate:
       maxSurge: 0
   extraContainers:
-       - image: giriraj789/tester:v1
-       name: debug
-       command:
-         - /bin/sh
-         - -c
-         - sleep 3600
+  - image: giriraj789/tester:v1
+    name: debug
+    command:
+    - /bin/sh
+    - -c
+    - sleep 3600
   nginxplus: true
   nginxReloadTimeout: 60000
   appprotect:
@@ -21,7 +23,7 @@ controller:
   nginxDebug: true
   logLevel: 3
   customPorts: []
-  nodeSelector: {node: f5-nginxpoc-01}
+  watchNamespace: "nginx-ingress"
   image:
     repository: giriraj789/ic-nap
     tag: "3.1.1"
@@ -63,6 +65,8 @@ controller:
   enableTLSPassthrough: false
   enableCertManager: false
   enableExternalDNS: false
+  serviceAccount:
+    name: nginx-ingress
   globalConfiguration:
     create: true
     spec:
@@ -87,11 +91,11 @@ controller:
     httpsPort:
       enable: false
   pod:
-    annotations: {robin.io/networks: '[{"ippool": "f5-nic-mgmtbond0", "interface_name": "mgmt", "static_ips": ["240b:c0e0:103:547f:d818:2:0000:0001-0003"]}, {"ippool": "f5-nic-corebond0", "interface_name": "core", "static_ips": ["240b:c0e0:103:283e:d818:2:0000:0001-0003"]}, {"ippool": "f5-nic-logbond0", "interface_name": "log", "static_ips": ["240b:c0e0:103:547e:d818:2:0000:0001-0003"]}]', sidecar.istio.io/inject: "false"}
-    extraLabels: {app.kubernetes.io/name: nginx-ingress, app.kubernetes.io/instance: nginx-ingress, cnfc_uuid: 556b4b9e-7286-4e68-a68d-6201b27d1573, cnf_uuid: a0bd2869-028f-4d32-8229-9ecea391d3a5, ns_uuid: e02275dc-b198-41b0-b5b5-951b82cf5ec7}
+    extraLabels: {app.kubernetes.io/name: nginx-ingress}
+    annotations: {robin.io/networks: '[{"ippool": "f5-nic-mgmtbond0", "interface_name": "mgmt", "static_ips": ["f5f5:f0e0:103:547f:d818:2:0000:0001-0003"]}, {"ippool": "f5-nic-corebond0", "interface_name": "core", "static_ips": ["f5f5:c0e0:103:283e:d818:2:0000:0001-0003"]}, {"ippool": "f5-nic-logbond0", "interface_name": "log", "static_ips": ["240b:f5f5:103:547e:d818:2:0000:0001-0003"]}]', sidecar.istio.io/inject: "false"}
   disableIPV6: false
   rbac:
-    create: true
+    create: false
   prometheus:
     create: true
     port: 9113
