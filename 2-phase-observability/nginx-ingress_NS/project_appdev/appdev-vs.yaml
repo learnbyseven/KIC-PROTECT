@@ -1,0 +1,13 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: appdev-vs
+  namespace: nginx-ingress
+spec:
+  host: appdev.giri.local
+  policies:
+  - name: appdev-policy
+    namespace: secops
+  routes:
+  - path: /
+    route: appdev/appdev-vsr

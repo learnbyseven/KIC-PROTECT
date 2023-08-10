@@ -2,12 +2,12 @@ apiVersion: k8s.nginx.org/v1
 kind: Policy
 metadata:
   name: cafeshop-policy
-  namespace: nginx-ingress
+  namespace: sec
 spec:
   waf:
     enable: true
-    apPolicy: "nginx-ingress/cafeshop-appolicy"
+    apPolicy: "sec/cafeshop-appolicy"
     securityLogs:
     - enable: true
-      apLogConf: "nginx-ingress/cafeshop-aplogconf"
+      apLogConf: "sec/cafeshop-aplogconf"
       logDest: "stderr"

@@ -14,7 +14,7 @@ items:
       protocol: TCP
       targetPort: 443
     selector:
-       aff: nginx-ingress
+       app: nginx-ingress
     type: NodePort
   status:
     loadBalancer: {}
@@ -34,7 +34,7 @@ items:
       protocol: TCP
       targetPort: 80
     selector:
-       aff: nginx-ingress
+       app: nginx-ingress
     type: NodePort
   status:
     loadBalancer: {}

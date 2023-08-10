@@ -1,0 +1,10 @@
+apiVersion: appprotect.f5.com/v1beta1
+kind: APPolicy
+metadata:
+  name: appdev-appolicy
+  namespace: secops
+spec:
+  policy:
+    name: app_protect_default_policy
+    template:
+      name: POLICY_TEMPLATE_NGINX_BASE
