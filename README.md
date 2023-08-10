@@ -125,6 +125,8 @@ POD health
 - health-status-uri=/nginx-health
 - ready-status-port=8081
 
+
 #### RBAC high level view
-<img width="799" alt="image" src="https://user-images.githubusercontent.com/34051943/223352679-66bf7f13-7b35-4ec8-ba77-0b17966b5dad.png">
+
+<img width="799" alt="image" src="https://github.com/learnbyseven/kicWAF/assets/34051943/f95ecdcb-3b1e-4939-818f-ff93c579d7e6">
 
