@@ -128,6 +128,5 @@ POD health
 
 #### RBAC high level view
 
-<img width="799" alt="image" src="![Rk-Process-map](https://github.com/learnbyseven/kicWAF/assets/34051943/c6463b6c-1618-4517-833d-0f3ca28a4eb7)
-">
+<img width="799" alt="image" src="https://github.com/learnbyseven/kicWAF/assets/34051943/c6463b6c-1618-4517-833d-0f3ca28a4eb7">
 
