@@ -128,7 +128,7 @@ POD health
 
 #### RBAC high-level view
 
-##### Procedure to test, validate resources after running $kubectl create/apply -f /directory
+##### Procedure to test, and validate resources after running $kubectl create/apply -f /directory
 ```
 1. kubectl create ns appdev
 2. kubectl create ns secops
@@ -136,8 +136,8 @@ POD health
 4. kubectl apply -f appdev_NS/
 5. kubectl apply -f secops_NS/project_appdev/
 6. kubectl apply -f nginx-ingress_NS/project_appdev/
-7. Validate resources created by point 1,2,4,5,6,7
-8. Application/Route verification step $curl -H "Host: appdev.giri.local" http://nic_ip:nic_port
+7. Validate resources created by point 1,2,4,5 & 6 - Point 8 to verify ingress and Point 9 to inject CSS to validate app protect
+8. curl -H "Host: appdev.giri.local" http://nic_ip:nic_port
 9. curl -X POST -i --data '<script>alert(/XSS/)</script>' -H "Host: appdev.giri.local" http://nic_ip:nic_port
 ```
 <img width="799" alt="image" src="https://github.com/learnbyseven/kicWAF/assets/34051943/c6463b6c-1618-4517-833d-0f3ca28a4eb7">
