@@ -128,11 +128,11 @@ POD health
 
 #### RBAC high-level view
 
-##### Procedure to test , validate resources after running $kubectl create/apply -f /directory
+##### Procedure to test, validate resources after running $kubectl create/apply -f /directory
 ```
 1. kubectl create ns appdev
 2. kubectl create ns secops
-3. cd kicWAF/2-phase-observability
+3. git clone https://github.com/learnbyseven/kicWAF.git && cd kicWAF/2-phase-observability
 4. kubectl apply -f appdev_NS/
 5. kubectl apply -f secops_NS/project_appdev/
 6. kubectl apply -f nginx-ingress_NS/project_appdev/
