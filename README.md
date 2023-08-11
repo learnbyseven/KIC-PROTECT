@@ -136,7 +136,7 @@ POD health
 4. kubectl apply -f appdev_NS/
 5. kubectl apply -f secops_NS/project_appdev/
 6. kubectl apply -f nginx-ingress_NS/project_appdev/
-7. Validate resources created by point 1,2,4,5 & 6 - Point 8 to verify ingress and Point 9 to inject CSS to validate app protect
+7. Validate resources created by points 1,2,4,5 & 6, Point 8 to verify ingress, Point 9 to validate app protect firewall
 8. curl -H "Host: appdev.giri.local" http://nic_ip:nic_port
 9. curl -X POST -i --data '<script>alert(/XSS/)</script>' -H "Host: appdev.giri.local" http://nic_ip:nic_port
 ```
