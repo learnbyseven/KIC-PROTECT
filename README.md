@@ -128,7 +128,7 @@ POD health
 
 #### RBAC high-level view
 
-##### Procedure to test, and validate resources after running $kubectl create/apply -f /directory
+##### Procedure to test.
 ```
 1. kubectl create ns appdev
 2. kubectl create ns secops
