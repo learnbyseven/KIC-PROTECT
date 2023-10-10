@@ -1,4 +1,4 @@
-![Rk-Process-map](https://github.com/learnbyseven/kicWAF/assets/34051943/542a255a-8694-466c-80c3-a5a38a1886cf)# Usecases Phase1
+# Usecases Phase1
 
 1. HTTP Load Balancing 
 2. TCP Load Balancing 
@@ -140,4 +140,12 @@ POD health
 8. curl -H "Host: appdev.giri.local" http://nic_ip:nic_port
 9. curl -X POST -i --data '<script>alert(/XSS/)</script>' -H "Host: appdev.giri.local" http://nic_ip:nic_port
 ```
+
+## NIC cluster-admin ROLE
 <img width="799" alt="image" src="https://github.com/learnbyseven/kicWAF/assets/34051943/c6463b6c-1618-4517-833d-0f3ca28a4eb7">
+
+## NIC admin ROLE
+
+<img width="799" alt="image" src="https://github.com/learnbyseven/kicWAF/assets/34051943/542a255a-8694-466c-80c3-a5a38a1886cf">
+
+
