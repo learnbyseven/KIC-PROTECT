@@ -1,0 +1,103 @@
+    groups:
+    - name: NIC
+      rules:
+      - alert: Nic_down_alert
+        annotations:
+          description: "One or more NIC pods is not responding for the last 3 minutes LABELS: {{ $labels.instance }}"
+        expr: sum by (ns_uuid,cnf_uuid,cnfc_uuid) (nginx_ingress_nginxplus_up{kubernetes_pod_name=~"f5.*"}) != 3
+        for: 3m
+        labels:
+          alarm_job: ic-nginx
+          reported: Nginx_Ingress_Controller
+          etsiMapping: new
+          severity: major
+      - alert: Nic_configurationreloaderror_alert
+        annotations:
+          description: "Nic last configuration reloads returning a Zero code for the last 3 minutes LABELS: {{ $labels.instance }}"
+        expr: sum by (ns_uuid,cnf_uuid,cnfc_uuid) (nginx_ingress_controller_nginx_last_reload_status{kubernetes_pod_name=~"f5.*"}) != 3
+        for: 3m
+        labels:
+          alarm_job: ic-nginx
+          reported: Nginx_Ingress_Controller
+          etsiMapping: new
+          severity: major
+      - alert: Nic_connectionsdropped_rate_alert
+        annotations:
+          description: "Nic high connections dropped error rate  for the last 3 minutes LABELS: {{ $labels.instance }}"
+        expr: (sum by (ns_uuid,cnf_uuid,cnfc_uuid) (rate(nginx_ingress_nginxplus_connections_dropped[1m])) / sum by (ns_uuid,cnf_uuid,cnfc_uuid) (rate(nginx_ingress_nginxplus_connections_accepted[1m])) * 100) > 5
+        for: 3m
+        labels:
+          alarm_job: ic-nginx
+          reported: Nginx_Ingress_Controller
+          etsiMapping: new
+          severity: major
+      - alert: Nic_sslhandshakefailed_rate_alert
+        annotations:
+          description: "Too many SSL handshakes failed with rate for the last 5 minutes LABELS: {{ $labels.instance }}"
+        expr: (sum by (ns_uuid,cnf_uuid,cnfc_uuid) (rate(nginx_ingress_nginxplus_ssl_handshakes_failed[1m])) / sum by (ns_uuid,cnf_uuid,cnfc_uuid) (rate(nginx_ingress_nginxplus_ssl_handshakes[1m])) * 100) > 5
+        for: 5m
+        labels:
+          alarm_job: ic-nginx
+          reported: Nginx_Ingress_Controller
+          etsiMapping: new
+          severity: major
+      - alert: Nic_limitrequestrejected_rate_alert
+        annotations:
+          description: "Too many limit requests rejected with rate for the last 3 minutes LABELS: {{ $labels.instance }}"
+        expr: (sum by (ns_uuid,cnf_uuid,cnfc_uuid) (rate(nginx_ingress_nginxplus_limit_request_rejected[1m])) / sum by (ns_uuid,cnf_uuid,cnfc_uuid) (rate(nginx_ingress_nginxplus_limit_request_passed[1m])) * 100) > 5
+        for: 3m
+        labels:
+          alarm_job: ic-nginx
+          reported: Nginx_Ingress_Controller
+          etsiMapping: new
+          severity: major
+      - alert: Nic_limitconnectionrejected_rate_alert
+        annotations:
+          description: "Too many limit connections rejected with rate for the last 3 minutes LABELS: {{ $labels.instance }}"
+        expr: (sum by (ns_uuid,cnf_uuid,cnfc_uuid) (rate(nginx_ingress_nginxplus_limit_connection_rejected[1m])) / sum by (ns_uuid,cnf_uuid,cnfc_uuid) (rate(nginx_ingress_nginxplus_limit_connection_passed[1m])) * 100) > 5
+        for: 3m
+        labels:
+          alarm_job: ic-nginx
+          reported: Nginx_Ingress_Controller
+          etsiMapping: new
+          severity: major
+      - alert: Nic_highHttp4xxerror_rate_alert
+        annotations:
+          description: "Too many HTTP requests with status 4 for the last 5 minutes LABELS: {{ $labels }}"
+        expr: (sum by (ns_uuid,cnf_uuid,cnfc_uuid) (rate(nginx_ingress_nginxplus_http_requests_total{status=~"4.."}[1m])) / sum by (ns_uuid,cnf_uuid,cnfc_uuid) (rate(nginx_ingress_nginxplus_http_requests_total[1m])) * 100) > 5
+        for: 5m
+        labels:
+          alarm_job: ic-nginx
+          reported: Nginx_Ingress_Controller
+          etsiMapping: new
+          severity: major
+      - alert: Nic_highHttp5xxerror_rate_alert
+        annotations:
+          description: "Too many HTTP requests with status 5 for the last 5 minutes LABELS: {{ $labels }}"
+        expr: (sum by (ns_uuid,cnf_uuid,cnfc_uuid) (rate(nginx_ingress_nginxplus_http_requests_total{status=~"5.."}[1m])) / sum by (ns_uuid,cnf_uuid,cnfc_uuid) (rate(nginx_ingress_nginxplus_http_requests_total[1m])) * 100) > 5
+        for: 5m
+        labels:
+          alarm_job: ic-nginx
+          reported: Nginx_Ingress_Controller
+          etsiMapping: new
+          severity: major
+      - alert: Nic_highlatency_alert
+        annotations:
+          description: "Nic p99 latency is higher than 10 seconds for the last 5 minutes LABELS: {{ $labels }}"
+        expr: histogram_quantile(0.99, sum by (ns_uuid,cnf_uuid,cnfc_uuid) (rate(nginx_ingress_nginxplus_http_requests_total_duration_seconds_bucket[30m])) by (ns_uuid,cnf_uuid,cnfc_uuid)) > 10
+        for: 5m
+        labels:
+          alarm_job: ic-nginx
+          reported: Nginx_Ingress_Controller
+          etsiMapping: new
+          severity: major
+      - alert: Nic_resolvererror_rate_alert
+        annotations:
+          description: "Nic resolver error rate for the last 5 minutes LABELS: {{ $labels.resolver }}"
+        expr: (sum by (ns_uuid,cnf_uuid,cnfc_uuid) (rate(nginx_ingress_nginxplus_resolver_refused[1m])) / sum by (ns_uuid,cnf_uuid,cnfc_uuid) (rate(nginx_ingress_nginxplus_resolver_noerror[1m])) * 100) > 5
+        for: 5m
+        labels:
+          alarm_job: ic-nginx
+          reported: Nginx_Ingress_Controller
+          etsiMapping: new
+          severity: major
