@@ -1,0 +1,13 @@
+apiVersion: k8s.nginx.org/v1
+kind: Policy
+metadata:
+  name: appdev-policy
+  namespace: secops
+spec:
+  waf:
+    enable: true
+    apPolicy: "secops/appdev-appolicy"
+    securityLogs:
+    - enable: true
+      apLogConf: "secops/appdev-aplogconf"
+      logDest: "stderr"
