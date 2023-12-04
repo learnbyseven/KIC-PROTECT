@@ -1,0 +1,36 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: secops-role
+  namespace: secops
+rules:
+  - apiGroups:
+    - k8s.nginx.org
+    resources:
+    - policies
+    verbs: ["*"]
+  - apiGroups:
+    - appprotect.f5.com
+    resources:
+    - appolicies
+    verbs: ["*"]
+  - apiGroups:
+    - appprotect.f5.com
+    resources:
+    - aplogconfs
+    verbs: ["*"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: secops-rolebinding
+  namespace: secops
+subjects:
+- kind: User
+  name: "secops-admin" ## To be replaced by existing NIC admin AD user account.
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role 
+  name: secops-role
+  apiGroup: rbac.authorization.k8s.io
+---

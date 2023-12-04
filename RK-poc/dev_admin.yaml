@@ -1,0 +1,20 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1 
+kind: Role 
+metadata:   
+  name: app-role   
+  namespace: app-dev rules:   - apiGroups: [ "*" ]     resources: [ "*"]     verbs: ["*"]
+  --- apiVersion: rbac.authorization.k8s.io/v1 kind: RoleBinding metadata:   name:
+  aduser-rolebinding   namespace: nginx-ingress subjects: - kind: User   name: "appdev-admin"
+  ## To be replaced by existing App dev admin AD user account.   apiGroup: rbac.authorization.k8s.io '
+- 'roleRef:   kind: Role    name: aduser-role   apiGroup: rbac.authorization.k8s.io
+  --- apiVersion: rbac.authorization.k8s.io/v1 kind: ClusterRole metadata:   name:
+  aduser-cluster-role rules: - apiGroups:   - networking.k8s.io   resources:   - ingressclasses   verbs:
+  ["*"] - apiGroups:   - k8s.nginx.org   resources:   - virtualserverroutes   verbs:
+  ["get", "watch", "list"] - apiGroups:   - k8s.nginx.org   resources:   - policies   verbs:
+  ["get", "watch", "list"] - apiGroups:   - appprotect.f5.com   resources:   - appolicies   verbs:
+  ["get", "watch", "list"] - apiGroups:   - appprotect.f5.com   resources:   - aplogconfs   verbs:
+  ["get", "watch", "list"]  --- apiVersion: rbac.authorization.k8s.io/v1 kind: ClusterRoleBinding
+  metadata:   name: aduser-cluster-rolebinding roleRef:   apiGroup: rbac.authorization.k8s.io   kind:
+  ClusterRole   name: aduser-cluster-role subjects: - kind: User   name: " appdev-admin
+  " ## To be replaced by the existing App dev admin AD user account.   apiGroup: rbac.authorization.k8s.io
