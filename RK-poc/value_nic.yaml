@@ -5,13 +5,6 @@ controller:
   strategy:
     rollingUpdate:
       maxSurge: 0
-  extraContainers:
-  - image: giriraj789/tester:v1
-    name: debug
-    command:
-    - /bin/sh
-    - -c
-    - sleep 3600
   nginxplus: true
   nginxReloadTimeout: 60000
   appprotect:
@@ -23,10 +16,9 @@ controller:
   nginxDebug: true
   logLevel: 3
   customPorts: []
-  watchNamespace: "nginx-ingress"
   image:
-    repository: giriraj789/ic-nap
-    tag: "3.1.1"
+    repository: artifactory/ic-nap
+    tag: "3.0.2"
     pullPolicy: IfNotPresent
   lifecycle: {}
   customConfigMap: ""
@@ -45,17 +37,7 @@ controller:
       cpu: 2
       memory: 2Gi
   tolerations: []
-  affinity:
-   podAntiAffinity:
-     requiredDuringSchedulingIgnoredDuringExecution:
-     - labelSelector:
-         matchExpressions:
-         - key: app
-           operator: In
-           values:
-           - my-nic-nginx-ingress
-       topologyKey: "kubernetes.io/hostname"
-  replicaCount: 2
+  replicaCount: 3
   ingressClass: nginx
   watchNamespace: ""
   enableCustomResources: true
@@ -83,7 +65,7 @@ controller:
   nginxStatus:
     enable: true
     port: 8080
-    allowCidrs: "0.0.0.0/0,0:0:0:0:0:0:0:0/0"
+    allowCidrs: "0.0.0.0/0,0:0:0:0:0:0:0:0/0" # Mutable value and can be replaced by actual allowed CIDR
   service:
     create: false
     httpPort:
@@ -92,7 +74,7 @@ controller:
       enable: false
   pod:
     extraLabels: {app.kubernetes.io/name: nginx-ingress}
-    annotations: {robin.io/networks: '[{"ippool": "f5-nic-mgmtbond0", "interface_name": "mgmt", "static_ips": ["f5f5:f0e0:103:547f:d818:2:0000:0001-0003"]}, {"ippool": "f5-nic-corebond0", "interface_name": "core", "static_ips": ["f5f5:c0e0:103:283e:d818:2:0000:0001-0003"]}, {"ippool": "f5-nic-logbond0", "interface_name": "log", "static_ips": ["240b:f5f5:103:547e:d818:2:0000:0001-0003"]}]', sidecar.istio.io/inject: "false"}
+    annotations: {robin.io/networks: '[{"ippool": "f5-nic-mgmtbond0", "interface_name": "mgmt", "static_ips": ["f5f5:f0e0:103:547f:d818:2:0000:0001-0003"]}, {"ippool": "f5-nic-corebond0", "interface_name": "core", "static_ips": ["f5f5:c0e0:103:283e:d818:2:0000:0001-0003"]}, {"ippool": "f5-nic-logbond0", "interface_name": "log", "static_ips": ["240b:f5f5:103:547e:d818:2:0000:0001-0003"]}]', sidecar.istio.io/inject: "false"} # To be replaced by the actual robin networ details.
   disableIPV6: false
   rbac:
     create: false
