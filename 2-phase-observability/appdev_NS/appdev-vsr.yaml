@@ -4,7 +4,7 @@ metadata:
   name: appdev-vsr
   namespace: appdev
 spec:
-  host: appdev.giri.local
+  host: appdev.example.com
   upstreams:
   - name: appdev
     service: appdev
