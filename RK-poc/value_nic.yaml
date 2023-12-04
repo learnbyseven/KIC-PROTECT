@@ -1,0 +1,101 @@
+rbac:
+  create: false
+controller:
+  kind: deployment
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+  extraContainers:
+  - image: giriraj789/tester:v1
+    name: debug
+    command:
+    - /bin/sh
+    - -c
+    - sleep 3600
+  nginxplus: true
+  nginxReloadTimeout: 60000
+  appprotect:
+    enable: true
+  appprotectdos:
+    enable: false
+  hostNetwork: false
+  dnsPolicy: ClusterFirst
+  nginxDebug: true
+  logLevel: 3
+  customPorts: []
+  watchNamespace: "nginx-ingress"
+  image:
+    repository: giriraj789/ic-nap
+    tag: "3.1.1"
+    pullPolicy: IfNotPresent
+  lifecycle: {}
+  customConfigMap: ""
+  config:
+    name: nginx-config
+    annotations: {}
+    entries: {}
+  terminationGracePeriodSeconds: 30
+  autoscaling:
+    enabled: false
+  resources:
+    requests:
+      cpu: 2
+      memory: 2Gi
+    limits:
+      cpu: 2
+      memory: 2Gi
+  tolerations: []
+  affinity:
+   podAntiAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+     - labelSelector:
+         matchExpressions:
+         - key: app
+           operator: In
+           values:
+           - my-nic-nginx-ingress
+       topologyKey: "kubernetes.io/hostname"
+  replicaCount: 2
+  ingressClass: nginx
+  watchNamespace: ""
+  enableCustomResources: true
+  enablePreviewPolicies: false
+  enableOIDC: false
+  includeYear: false
+  enableTLSPassthrough: false
+  enableCertManager: false
+  enableExternalDNS: false
+  serviceAccount:
+    name: nginx-ingress
+  globalConfiguration:
+    create: true
+    spec:
+     listeners:
+     - name: lb-udp
+       port: 5353
+       protocol: UDP
+     - name: lb-tcp
+       port: 5353
+       protocol: TCP
+  enableSnippets: true
+  healthStatus: true
+  healthStatusURI: "/nginx-health"
+  nginxStatus:
+    enable: true
+    port: 8080
+    allowCidrs: "0.0.0.0/0,0:0:0:0:0:0:0:0/0"
+  service:
+    create: false
+    httpPort:
+      enable: false
+    httpsPort:
+      enable: false
+  pod:
+    extraLabels: {app.kubernetes.io/name: nginx-ingress}
+    annotations: {robin.io/networks: '[{"ippool": "f5-nic-mgmtbond0", "interface_name": "mgmt", "static_ips": ["f5f5:f0e0:103:547f:d818:2:0000:0001-0003"]}, {"ippool": "f5-nic-corebond0", "interface_name": "core", "static_ips": ["f5f5:c0e0:103:283e:d818:2:0000:0001-0003"]}, {"ippool": "f5-nic-logbond0", "interface_name": "log", "static_ips": ["240b:f5f5:103:547e:d818:2:0000:0001-0003"]}]', sidecar.istio.io/inject: "false"}
+  disableIPV6: false
+  rbac:
+    create: false
+  prometheus:
+    create: true
+    port: 9113
