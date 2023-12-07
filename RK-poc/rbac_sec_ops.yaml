@@ -2,7 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: secops-role
-  namespace: secops
+  namespace: sec
 rules:
   - apiGroups:
     - k8s.nginx.org
@@ -24,7 +24,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: secops-rolebinding
-  namespace: secops
+  namespace: sec
 subjects:
 - kind: User
   name: "secops-admin" ## To be replaced by existing NIC admin AD user account.
