@@ -4,7 +4,7 @@ metadata:
   name: appdev-vs
   namespace: nginx-ingress
 spec:
-  host: appdev.example.local ## To be replaced by actual host or domain name 
+  host: appdev.ramhanu.com ## To be replaced by actual host or domain name 
   policies:
   - name: appdev-policy
     namespace: secops
