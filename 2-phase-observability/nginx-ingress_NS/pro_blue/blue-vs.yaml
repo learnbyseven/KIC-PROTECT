@@ -1,0 +1,13 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: blue-vs
+  namespace: nginx-ingress
+spec:
+  host: blue.giri.local ## To be replaced by actual host or domain name 
+  policies:
+  - name: appdev-policy
+    namespace: secops
+  routes:
+  - path: /
+    route: blue/bluenp-vsr

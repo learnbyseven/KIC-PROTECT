@@ -2,26 +2,26 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: ind
+  name: test1
   labels:
     istio-injection: enabled
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test
+  name: testsm
   labels:
-    app: test
+    app: testsm
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: test
+      app: testsm
   template:
     metadata:
       labels:
-        app: test
+        app: testsm
     spec:
       containers:
-      - name: test
+      - name: testsm
         image: giriraj789/tester:v1

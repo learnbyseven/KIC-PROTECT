@@ -1,0 +1,16 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServerRoute
+metadata:
+  name: bluenp-vsr
+  namespace: blue
+spec:
+  host: blue.giri.local
+  upstreams:
+  - name: bluenp
+    service: bluenp
+    port: 30007
+  subroutes:
+  - path: /
+    action:
+     pass: bluenp
+
