@@ -1,0 +1,11 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: myapp-vs
+  namespace: nic
+spec:
+  host: myapp.ramhanu.com ## To be replaced by actual host or domain name 
+  ingressClassName: nic
+  routes:
+  - path: /
+    route: test/myapp-vsr

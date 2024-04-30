@@ -1,0 +1,16 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServerRoute
+metadata:
+  name: myapp-vsr
+  namespace: test
+spec:
+  host: myapp.ramhanu.com
+  ingressClassName: nic
+  upstreams:
+  - name: myapp
+    port: 80
+    service: myapp
+  subroutes:
+  - path: /
+    action:
+     pass: myapp

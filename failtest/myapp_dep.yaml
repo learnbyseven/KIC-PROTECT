@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  namespace: test
+  labels:
+    app: myapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: docker.io/giriraj789/informatica:v2
+        ports:
+        - containerPort: 80
+          name: http-myapp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+  namespace: test
+spec:
+  selector:
+    app: myapp
+  ports:
+    - name: http-myapp
+      protocol: TCP
+      port: 80
+      targetPort: 80
+---
