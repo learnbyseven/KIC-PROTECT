@@ -1,0 +1,46 @@
+echo """runtime-endpoint: unix:///run/containerd/containerd.sock
+image-endpoint: unix:///run/containerd/containerd.sock
+""" > /etc/crictl.yaml
+
+
+---
+apiVersion: v1
+kind: Service
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: https-nginx-ingress
+    namespace: nginx-ingress
+  spec:
+    ports:
+    - nodePort: 30443
+      port: 443
+      protocol: TCP
+      targetPort: 443
+    selector:
+       app: nginx-ingress
+    type: NodePort
+  status:
+    loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: http-nginx-ingress
+    namespace: nginx-ingress
+  spec:
+    ports:
+    - nodePort: 30080
+      port: 80
+      protocol: TCP
+      targetPort: 80
+    selector:
+      app: nginx-ingress
+    type: NodePort
+  status:
+    loadBalancer: {}
+---
