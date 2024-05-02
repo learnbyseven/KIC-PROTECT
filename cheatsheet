@@ -60,3 +60,8 @@ kubectl apply -f config/crd/bases/k8s.nginx.org_virtualserverroutes.yaml
 kubectl apply -f config/crd/bases/k8s.nginx.org_transportservers.yaml
 kubectl apply -f config/crd/bases/k8s.nginx.org_policies.yaml
 kubectl apply -f config/crd/bases/k8s.nginx.org_globalconfigurations.yaml
+k get crds
+
+
+
+kubectl get namespace calico-apiserver -o json   | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/"   | kubectl replace --raw /api/v1/namespaces/calico-apiserver/finalize -f -
