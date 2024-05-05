@@ -2,21 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: votedb
+  name: db
 spec: 
   replicas: 2
   selector: 
     matchLabels: 
-      app: votedb
+      app: db
   template: 
     metadata: 
       labels: 
-        app: votedb
+        app: db
     spec: 
       containers: 
         - 
-          image: "docker.io/giriraj789/votedb:v1"
-          name: votedb
+          image: "docker.io/giriraj789/mysql:codestdcode"
+          name: db
           ports: 
             - 
               containerPort: 3306

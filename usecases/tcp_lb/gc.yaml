@@ -1,0 +1,13 @@
+apiVersion: k8s.nginx.org/v1
+kind: GlobalConfiguration
+metadata:
+  name: nginx-configuration
+  namespace: nginx-ingress
+spec:
+  listeners:
+  - name: tcp-lb
+    port: 7777
+    protocol: TCP
+  - name: udp-lb
+    port: 9999
+    protocol: UDP

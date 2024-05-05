@@ -1,0 +1,29 @@
+#tcp app
+#Working info : This app has netcat install, below 
+#Login on tcpapp
+#touch index.html
+#echo "tcp-srv-01" > index.html
+#while true; do netcat -l -v -k -p 7777 < index.html; done
+#netcat -v am11.192.168.0.69.nip.io 30777
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: tcpapp
+spec: 
+  replicas: 2
+  selector: 
+    matchLabels: 
+      app: tcpapp
+  template: 
+    metadata: 
+      labels: 
+        app: tcpapp
+    spec: 
+      containers: 
+        - 
+          image: "docker.io/giriraj789/tester:v1"
+          name: tcpapp
+          ports: 
+            - 
+              containerPort: 7777

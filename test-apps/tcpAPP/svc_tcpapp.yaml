@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tcpappsvc
+spec:
+  selector:
+    app: tcpappsvc
+  ports:
+    - name: tcpappsvc
+      port: 7777
+      targetPort: 777
+      protocol: TCP

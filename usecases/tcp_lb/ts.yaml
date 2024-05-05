@@ -1,0 +1,14 @@
+apiVersion: k8s.nginx.org/v1
+kind: TransportServer
+metadata:
+  name: tcpapp
+spec:
+  listener:
+    name: tcp-lb
+    protocol: TCP
+  upstreams:
+  - name: tcpapp
+    service: tcpappsvc
+    port: 7777
+  action:
+    pass: tcpapp

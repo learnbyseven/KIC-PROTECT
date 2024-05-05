@@ -1,0 +1,14 @@
+apiVersion: k8s.nginx.org/v1alpha1
+kind: TransportServer
+metadata:
+  name: dns-tcp
+spec:
+  listener:
+    name: tcp-app
+    protocol: TCP
+  upstreams:
+  - name: tcpapp
+    service: tcpappsvc
+    port: 7777
+  action:
+    pass: tcpapp
