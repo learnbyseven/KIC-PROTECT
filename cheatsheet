@@ -1,0 +1,67 @@
+echo """runtime-endpoint: unix:///run/containerd/containerd.sock
+image-endpoint: unix:///run/containerd/containerd.sock
+""" > /etc/crictl.yaml
+
+
+---
+apiVersion: v1
+kind: Service
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: https-nginx-ingress
+    namespace: nginx-ingress
+  spec:
+    ports:
+    - nodePort: 30443
+      port: 443
+      protocol: TCP
+      targetPort: 443
+    selector:
+       app: nginx-ingress
+    type: NodePort
+  status:
+    loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: http-nginx-ingress
+    namespace: nginx-ingress
+  spec:
+    ports:
+    - nodePort: 30080
+      port: 80
+      protocol: TCP
+      targetPort: 80
+    selector:
+      app: nginx-ingress
+    type: NodePort
+  status:
+    loadBalancer: {}
+---
+
+
+
+git clone https://github.com/nginxinc/kubernetes-ingress.git --branch v3.4.3
+cd kubernetes-ingress/
+kubectl apply -f deployments/common/ns-and-sa.yaml
+kubectl apply -f deployments/rbac/rbac.yaml
+kubectl apply -f deployments/rbac/ap-rbac.yaml
+kubectl apply -f examples/shared-examples/default-server-secret/default-server-secret.yaml
+kubectl apply -f deployments/common/nginx-config.yaml
+kubectl apply -f deployments/common/ingress-class.yaml
+kubectl apply -f config/crd/bases/k8s.nginx.org_virtualservers.yaml
+kubectl apply -f config/crd/bases/k8s.nginx.org_virtualserverroutes.yaml
+kubectl apply -f config/crd/bases/k8s.nginx.org_transportservers.yaml
+kubectl apply -f config/crd/bases/k8s.nginx.org_policies.yaml
+kubectl apply -f config/crd/bases/k8s.nginx.org_globalconfigurations.yaml
+k get crds
+
+
+
+kubectl get namespace calico-apiserver -o json   | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/"   | kubectl replace --raw /api/v1/namespaces/calico-apiserver/finalize -f -
