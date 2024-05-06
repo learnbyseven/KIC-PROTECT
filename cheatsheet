@@ -1,3 +1,7 @@
+kub install 
+https://kanzal.com/kubernetes-with-kubeadm-and-calico/
+
+
 echo """runtime-endpoint: unix:///run/containerd/containerd.sock
 image-endpoint: unix:///run/containerd/containerd.sock
 """ > /etc/crictl.yaml
