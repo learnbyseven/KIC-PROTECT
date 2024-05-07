@@ -75,4 +75,10 @@ workaround- Objects stuck in terminating state
 kubectl get namespace calico-apiserver -o json   | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/"   | kubectl replace --raw /api/v1/namespaces/calico-apiserver/finalize -f -
 
 TCP server command for NC tester:v1 image
-----------------------------------------
+------------------------------------------
+#Working info : This app has netcat install, below 
+#Login on tcpapp
+#touch index.html
+#echo "tcp-srv-01" > index.html
+#while true; do netcat -l -v -k -p 7777 < index.html; done
+#netcat -v am11.192.168.0.69.nip.io 30777
