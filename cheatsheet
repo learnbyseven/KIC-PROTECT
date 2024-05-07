@@ -1,7 +1,10 @@
-kub install 
+
+kub install
+------------
 https://kanzal.com/kubernetes-with-kubeadm-and-calico/
 
-
+Containerd workaround
+----------------------
 echo """runtime-endpoint: unix:///run/containerd/containerd.sock
 image-endpoint: unix:///run/containerd/containerd.sock
 """ > /etc/crictl.yaml
@@ -50,7 +53,8 @@ items:
 ---
 
 
-
+Nginx KIC Mainfest install steps
+----------------------------
 git clone https://github.com/nginxinc/kubernetes-ingress.git --branch v3.4.3
 cd kubernetes-ingress/
 kubectl apply -f deployments/common/ns-and-sa.yaml
@@ -66,6 +70,9 @@ kubectl apply -f config/crd/bases/k8s.nginx.org_policies.yaml
 kubectl apply -f config/crd/bases/k8s.nginx.org_globalconfigurations.yaml
 k get crds
 
-
-
+workaround- Objects stuck in terminating state
+-----------------------------------------------
 kubectl get namespace calico-apiserver -o json   | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/"   | kubectl replace --raw /api/v1/namespaces/calico-apiserver/finalize -f -
+
+TCP server command for NC tester:v1 image
+----------------------------------------
